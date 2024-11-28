@@ -31,9 +31,9 @@ def python_repl_tool(
         # If a plot was created, save it
         if plt.get_fignums():
             # Save the figure
-            plt.savefig('uk_gdp_chart.png', bbox_inches='tight', dpi=300)
+            plt.savefig('created_chart.png', bbox_inches='tight', dpi=300)
             plt.close('all')  # Close all figures
-            return f"Successfully executed code and saved plot as 'uk_gdp_chart.png'.\n{result}"
+            return f"Successfully executed code and saved plot as 'created_chart.png'.\n{result}"
             
         return f"Successfully executed code:\n{result}"
         

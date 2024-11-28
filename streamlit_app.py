@@ -42,8 +42,8 @@ def display_chat_history():
             else:
                 st.markdown(message["content"])
             # If this message created a plot, display it
-            if message.get("has_plot", False) and os.path.exists("uk_gdp_chart.png"):
-                st.image("uk_gdp_chart.png")
+            if message.get("has_plot", False) and os.path.exists("created_chart.png"):
+                st.image("created_chart.png")
 
 def clean_content(text: str) -> str:
     """Clean up message content by removing garbage and non-relevant text."""
@@ -181,8 +181,8 @@ def process_user_input(user_input: str):
                                 """.format(formatted_content), unsafe_allow_html=True)
                             
                             # Display plot only once
-                            if not plot_displayed and os.path.exists('uk_gdp_chart.png'):
-                                if 'saved plot' in content_text.lower() or 'uk_gdp_chart.png' in content_text.lower():
+                            if not plot_displayed and os.path.exists('created_chart.png'):
+                                if 'saved plot' in content_text.lower() or 'created_chart.png' in content_text.lower():
                                     try:
                                         # Add more specific CSS for centering
                                         st.markdown("""
@@ -205,9 +205,9 @@ def process_user_input(user_input: str):
                                         # Use equal columns for better centering
                                         col1, col2, col3 = st.columns([1, 3, 1])
                                         with col2:
-                                            st.image('uk_gdp_chart.png', 
+                                            st.image('created_chart.png', 
                                                     caption="", 
-                                                    width=1000)
+                                                    width=1100)
                                         plot_displayed = True
                                         logger.info("Successfully displayed plot")
                                     except Exception as e:
@@ -223,7 +223,7 @@ def process_user_input(user_input: str):
 # Add debug function
 def debug_plot():
     """Debug function to check plot file"""
-    plot_path = "uk_gdp_chart.png"
+    plot_path = "created_chart.png"
     if os.path.exists(plot_path):
         file_size = os.path.getsize(plot_path)
         st.sidebar.success(f"✅ Plot file exists ({file_size:,} bytes)")
