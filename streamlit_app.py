@@ -162,7 +162,7 @@ def process_user_input(user_input: str):
                                 if 'saved plot' in content_text.lower() or 'uk_gdp_chart.png' in content_text.lower():
                                     try:
                                         st.image('uk_gdp_chart.png', 
-                                               caption="UK GDP Trend (2019-2023)", 
+                                               caption="X axis", 
                                                use_column_width=True)
                                         plot_displayed = True
                                         logger.info("Successfully displayed plot")
