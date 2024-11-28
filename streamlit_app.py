@@ -77,18 +77,30 @@ def format_message(content: str) -> str:
     """Format message content with proper markdown."""
     content = clean_content(content)
     
-    # Convert numbered points to bullet points
-    import re
-    content = re.sub(r'^\d+\.\s', '• ', content, flags=re.MULTILINE)
+    # Format numbered lists properly
+    content = re.sub(r'^\d+\.\s', '\n* ', content, flags=re.MULTILINE)
     
-    # Convert dash points to bullet points
-    content = re.sub(r'^\s*-\s', '• ', content, flags=re.MULTILINE)
+    # Format bullet points properly
+    content = re.sub(r'^\s*-\s', '\n* ', content, flags=re.MULTILINE)
     
-    # Add proper spacing
+    # Format key findings or data points
+    content = re.sub(r'([\d.]+%)', '**\g<1>**', content)  # Bold percentages
+    content = re.sub(r'(£[\d,]+)', '**\g<1>**', content)  # Bold currency values
+    content = re.sub(r'(\$[\d,]+)', '**\g<1>**', content)  # Bold dollar values
+    
+    # Add proper section headers
+    content = re.sub(r'Key findings:', '\n### Key Findings:\n', content, flags=re.IGNORECASE)
+    content = re.sub(r'Summary:', '\n### Summary:\n', content, flags=re.IGNORECASE)
+    content = re.sub(r'Data sources:', '\n### Data Sources:\n', content, flags=re.IGNORECASE)
+    
+    # Add proper spacing between paragraphs
     paragraphs = content.split('\n')
     formatted = '\n\n'.join(p.strip() for p in paragraphs if p.strip())
     
-    return formatted
+    # Ensure proper spacing around lists
+    formatted = re.sub(r'\n\*', '\n\n*', formatted)
+    
+    return formatted.strip()
 
 def process_user_input(user_input: str):
     """Process user input and update chat"""
@@ -133,7 +145,14 @@ def process_user_input(user_input: str):
                             
                             formatted_content = format_message(content_text)
                             if formatted_content:  # Only display if there's content after cleaning
-                                st.markdown(f"🔍 Research: {formatted_content}")
+                                st.markdown("""
+                                <div style='font-size: 14px;'>
+                                
+                                #### Research Findings
+                                {}
+                                
+                                </div>
+                                """.format(formatted_content), unsafe_allow_html=True)
                 
                 # Handle chart generator messages
                 if 'chart_generator' in event:
@@ -155,15 +174,40 @@ def process_user_input(user_input: str):
                             
                             formatted_content = format_message(content_text)
                             if formatted_content:  # Only display if there's content after cleaning
-                                st.markdown(f"📊 Chart Generator: {formatted_content}")
+                                st.markdown("""
+                                <div style='font-size: 14px;'>
+                                📊 Chart Generator: {}
+                                </div>
+                                """.format(formatted_content), unsafe_allow_html=True)
                             
                             # Display plot only once
                             if not plot_displayed and os.path.exists('uk_gdp_chart.png'):
                                 if 'saved plot' in content_text.lower() or 'uk_gdp_chart.png' in content_text.lower():
                                     try:
-                                        st.image('uk_gdp_chart.png', 
-                                               caption="X axis", 
-                                               use_column_width=True)
+                                        # Add more specific CSS for centering
+                                        st.markdown("""
+                                            <style>
+                                                .stImage {
+                                                    text-align: center;
+                                                    display: block;
+                                                    margin-left: auto;
+                                                    margin-right: auto;
+                                                    width: 100%;
+                                                }
+                                                [data-testid="column"] {
+                                                    display: flex;
+                                                    justify-content: center;
+                                                    align-items: center;
+                                                }
+                                            </style>
+                                            """, unsafe_allow_html=True)
+                                        
+                                        # Use equal columns for better centering
+                                        col1, col2, col3 = st.columns([1, 3, 1])
+                                        with col2:
+                                            st.image('uk_gdp_chart.png', 
+                                                    caption="", 
+                                                    width=1000)
                                         plot_displayed = True
                                         logger.info("Successfully displayed plot")
                                     except Exception as e:
