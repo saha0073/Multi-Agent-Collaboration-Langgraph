@@ -1,12 +1,19 @@
-# Multi-Agent Research Assistant with LangGraph
+# AI Multi-Agent Collaboration with LangGraph: From Web Research to Data Visualization 🤖📊
 
 ## Overview
 
 A sophisticated multi-agent system built with LangGraph that combines research and visualization capabilities. The system uses specialized agents (Researcher and Chart Generator) working together to analyze data and create visualizations, demonstrating the power of agent collaboration in handling complex queries.
 
+## Agent Collaboration
+
+<img width="800" alt="Agent Collaboration" src="figures/agent_collaboration.png">
+
+The system demonstrates the power of multi-agent collaboration through a streamlined workflow. When a user submits a query, the Research Agent first scours the web using the Tavily search tool to gather relevant, up-to-date information. Once the data is collected, the Chart Generator Agent takes over, transforming the raw data into insightful visualizations using matplotlib. This seamless handoff between specialized agents showcases how LangGraph orchestrates complex tasks - from web research to data visualization - in a coordinated and efficient manner.
+
 ## 🚀 Try the App
 
-[Live Demo Link - Add your Streamlit deployment URL]
+Watch the demo: [YouTube Demo](https://youtu.be/rZSkYScTk_0)
+
 
 ## Quick Links
 
@@ -60,4 +67,5 @@ Here are some example interactions with the system:
 
 ## Usage
 
-1. Clone the repository:
+To run the Seedbot assistant:
+`streamlit run streamlit_app.py`
