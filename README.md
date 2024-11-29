@@ -6,7 +6,10 @@ A sophisticated multi-agent system built with LangGraph that combines research a
 
 ## Agent Collaboration
 
-<img width="800" alt="Agent Collaboration" src="static/agent_ui.png">
+<div align="center">
+<img width="400" alt="Agent Flow" src="figures/agent_architecture.png">
+<img width="800" alt="Agent Architecture" src="figures/agent_architecture_2.png">
+</div>
 
 The system demonstrates the power of multi-agent collaboration through a streamlined workflow. When a user submits a query, the Research Agent first scours the web using the Tavily search tool to gather relevant, up-to-date information. Once the data is collected, the Chart Generator Agent takes over, transforming the raw data into insightful visualizations using matplotlib. This seamless handoff between specialized agents showcases how LangGraph orchestrates complex tasks - from web research to data visualization - in a coordinated and efficient manner.
 
