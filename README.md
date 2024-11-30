@@ -2,7 +2,7 @@
 
 ## Overview
 
-A sophisticated multi-agent system built with LangGraph that combines research and visualization capabilities. The system uses specialized agents (Researcher and Chart Generator) working together to analyze data and create visualizations, demonstrating the power of agent collaboration in handling complex queries.
+A sophisticated end-to-end multi-agent system built with LangGraph that combines research and visualization capabilities. The system uses specialized agents (Researcher and Chart Generator) working together to analyze data and create visualizations, demonstrating the power of agent collaboration in handling complex queries.
 
 ## 🚀 Demo
 
@@ -31,7 +31,7 @@ Here are some example interactions with the system:
 | | |
 |:-------------------------:|:-------------------------:|
 |<img width="1604" alt="Cloud Computing market share" src="figures/cloud_computing_market_share.png"> Cloud Computing Market Share |  <img width="1604" alt="Social Media Usage" src="figures/social_media_usage.png"> Social Media Usage |
-|<img width="1604" alt="Netflix Revenue Distribution" src="figures/netflix_revenue_distribution.png"> Social Media Usage |  <img width="1604" alt="US 5 year GDP" src="figures/US_gdp_5_years.png"> US 5 year GDP|
+|<img width="1604" alt="Netflix Revenue Distribution" src="figures/netflix_revenue_distribution.png"> Social Media Usage |  <img width="1604" alt="US 5 year GDP" src="figures/US_gdp_5_years.png"> US's 5 year GDP|
 
 Sample queries:
 - "Research the market share of top 5 cloud computing providers in 2023 and create a pie chart to visualize their distribution. Once done, finish."     
